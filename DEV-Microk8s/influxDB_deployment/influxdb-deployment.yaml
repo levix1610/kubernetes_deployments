@@ -1,0 +1,61 @@
+# --- InfluxDB Deployment ---
+# Manages the InfluxDB Pod.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: influxdb-deployment # Name for the Deployment
+  namespace: default
+  labels:
+    app: influxdb
+spec:
+  # InfluxDB OSS typically runs as a single instance. Clustering is more complex.
+  replicas: 1
+  selector:
+    matchLabels:
+      app: influxdb # Must match labels on the Pod template
+  template:
+    metadata:
+      labels:
+        app: influxdb # Labels applied to the Pod(s)
+    spec:
+      securityContext: #Need to add to run container as admin since NFS share is set to Map as admin.
+        runAsUser: 1024           #Running as admin
+        runAsGroup: 1024          #Running as admin
+        #fsGroup: <Group_GID>
+      containers:
+      - name: influxdb # Name for the container
+        # Use a specific version tag is recommended over latest
+        image: influxdb:2.7.12 # updated (8/28/25)
+        ports:
+          # Default InfluxDB v2 API port
+        - containerPort: 8086
+          name: influxdb-http # Name for the port
+        volumeMounts:
+        - name: influx-data # Must match the volume name defined below
+          # Mount path inside the container as requested
+          mountPath: /app/data
+        # --- IMPORTANT: Configure InfluxDB to USE the mount path ---
+        # You likely need environment variables or a config file to tell
+        # InfluxDB where to store data. Add them here. Example for v2:
+        env:
+         - name: INFLUXD_BOLT_PATH
+           value: "/app/data/influxd.bolt"
+         - name: INFLUXD_ENGINE_PATH
+           value: "/app/data/engine"
+         #- name: INFLUXD_CONFIG_PATH # If using a config file mounted elsewhere
+         #  value: "/app/data/influxdb2/config.yml"
+        # --- Optional but Recommended: Resource Limits ---
+        resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m" # 1 CPU core
+
+      volumes:
+        # Define the volume that uses the PVC
+      - name: influx-data # Must match volumeMounts.name above
+        persistentVolumeClaim:
+          # Must match the metadata.name of the PVC defined above
+          claimName: influxdb-pvc
