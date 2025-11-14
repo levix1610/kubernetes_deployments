@@ -1,0 +1,19 @@
+# --- ClusterIP Service ---
+# Exposes the application Pods on a stable IP address 'within' the cluster
+# Other applications insdie the clust can reach the app via this service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: heimdall-clusterip-svc
+  namespace: default
+  labels:
+    app: heimdall # app
+spec:
+  type: ClusterIP # Service type
+  selector:
+    app: heimdall # app
+  ports:
+  - protocol: TCP # Protocol
+    port: 80
+    targetPort: 80 # e.g., 8080 (must match containerPort in Deployment)
