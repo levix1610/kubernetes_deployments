@@ -12,5 +12,5 @@ spec:
       port: 80 # Port the service is exposed too - 80 for httpS
       targetPort: 80
   type: LoadBalancer
-  loadBalancerIP: 10.0.150.10 # IP address for the service
+  loadBalancerIP: 10.0.150.12 # IP address for the service
   
