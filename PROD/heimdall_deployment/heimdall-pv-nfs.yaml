@@ -1,0 +1,23 @@
+#PV needs to be deployed before the app-pvc-nfs.yaml file.
+#This tells kubernetes where the storage is and removes the need for NFS to be mounted to the host. 
+#PV is a static resource in the cluster well the PVC is the request of that resource.
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: heimdall-pv
+  namespace: default
+  lebels:
+    app: heimdall
+spec:
+  storageClassName: nfs
+  capacity:
+    storage: 10Gi # Must match or ex
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain # Make sure directory files
+  nfs:
+    server: 10.0.150.200 # IP address of NAS for storage
+    path: /mnt/storage_poll/prod/microk8s/heimdall # Direct NFS share directory f
+
+ 
