@@ -24,7 +24,7 @@ spec:
         ports:
         - containerPort: 7575
           name: homarr-http
-        # --- ADD ENVIRONMENT VARIABLES ---
+        # --- ENVIRONMENT VARIABLES ---
         env:
         #homarr internal encryption key
         - name: SECRET_ENCRYPTION_KEY
@@ -55,7 +55,7 @@ spec:
             secretKeyRef:
               name: postgres-homarr-secret # Use the same secret
               key: POSTGRES_PASSWORD
-        # --- END OF ADDED ENVIRONMENT VARIABLES ---
+        # --- END OF ENVIRONMENT VARIABLES ---
         volumeMounts:  #Mounted volumes for storage of homarr.
           - name: homarr-data
             mountPath: /appdata #directory for configs folders.
