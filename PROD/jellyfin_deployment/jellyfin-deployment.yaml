@@ -1,0 +1,74 @@
+# --- Deployment ---
+# Manages the Pods running your application container.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # name: A unique name for your Deployment.
+  name: jellyfin-deployment
+  namespace: media
+  labels:
+    app: jellyfin
+spec:
+  replicas: 1 # e.g., 2
+  selector:
+    # Must match the labels on the Pod template below.
+    matchLabels:
+      app: jellyfin
+  template:
+    metadata:
+      # Labels applied to the Pods created by this Deployment. Must match spec.selector.matchLabels.
+      labels:
+        app: jellyfin
+    spec:
+      # Selector so pod will only run on workers.
+      nodeSelector:
+        node.kubernetes.io/microk8s-worker: microk8s-worker
+      containers:
+      - name: jellyfin
+        image: linuxserver/jellyfin:10.11.2 # update (11/03/25)
+        ports:
+        - containerPort: 8096 # The port your application listens on INSIDE the container (e.g., 8080)
+          name: jellyfin-http # http port for jellyfin container.
+        - containerPort: 8920
+          name: jellyfin-https # https port for jellyfin container.
+        # volumeMounts: Mounts the volume requested by the PVC into the container.
+        volumeMounts:
+        - name: jellyfin-data # Must match the volume name defined below in spec.volumes
+          # mountPath: The directory path inside the container where the storage will be accessible.
+          mountPath: /config # e.g., /app/data or /var/www/html
+          #mount path for remote media NFS shares. See Volumes below for NFS pointing.
+        - name: media-movies #Mount for movies
+          mountPath: /media/movies
+        - name: media-tv  #Mount for TV shows
+          mountPath: /media/tv
+        # --- Optional but Recommended ---
+        resources:    #needs to be on name level of containers
+         requests:
+           memory: "256Mi"
+           cpu: "500m"
+         limits:
+            memory: "2048Mi"
+            cpu: "3000m"
+        env:
+        - name: JELLYFIN_CONFIG_DIR
+          value: /config # Set Jellyfin's config directory to the mounted volume
+        # livenessProbe: ... (configure as needed)
+        # readinessProbe: ... (configure as needed)
+
+      # volumes: Defines the volumes available to the Pod.
+      volumes:
+      # - name: Must match the name used in volumeMounts above.
+      - name: jellyfin-data # e.g., app-data
+        # persistentVolumeClaim: Links this volume definition to the PVC created earlier.
+        persistentVolumeClaim:
+          # claimName: Must match the metadata.name of the PVC defined above.
+          claimName: jellyfin-pvc
+      #Mount Path for NFS shares housing Media.
+      - name: media-movies  #Volume definition for movies
+        nfs:
+          server: 10.0.150.10
+          path: /volume1/Movies #path to the remote NFS share the data lives in.
+      - name: media-tv     #Volume definition for TV shows
+        nfs:
+          server: 10.0.150.10
+          path: /volume1/TvShows #path to the remote NFS share the data lives in.
