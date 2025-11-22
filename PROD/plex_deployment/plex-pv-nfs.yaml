@@ -18,4 +18,4 @@ spec:
   persistentVolumeReclaimPolicy: Retain # Keeps data even after PV deletion.
   nfs:
     server: 10.0.150.200 # NFS target IP.
-    path: /mnt/storage_pool/prod/microk8s/plex # Target Path. Check that end directory is created.
+    path: /mnt/storage_pool/prod_microk8s/plex # Target Path. Check that end directory is created.
