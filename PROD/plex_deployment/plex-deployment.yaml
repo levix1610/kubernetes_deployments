@@ -33,7 +33,7 @@ spec:
               # Name of the secret
               name: plex-secrets
               # Key in the secret
-              key: PLEX_CLAIM_TOKEN
+              key: plex_claim_token
         ports:
         - containerPort: 32400 # The port your application listens on INSIDE the container.
           name: plex-http # http port for the plex container
