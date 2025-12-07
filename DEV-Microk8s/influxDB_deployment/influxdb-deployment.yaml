@@ -18,7 +18,7 @@ spec:
       labels:
         app: influxdb # Labels applied to the Pod(s)
     spec:
-      securityContext: #Need to add to run container as admin since NFS share is set to Map as admin.
+      securityContext: # Need to add to run container as admin since NFS share is set to Map as admin.
         runAsUser: 1024           #Running as admin
         runAsGroup: 1024          #Running as admin
         #fsGroup: <Group_GID>
@@ -42,7 +42,7 @@ spec:
            value: "/app/data/influxd.bolt"
          - name: INFLUXD_ENGINE_PATH
            value: "/app/data/engine"
-         #- name: INFLUXD_CONFIG_PATH # If using a config file mounted elsewhere
+         # name: INFLUXD_CONFIG_PATH # If using a config file mounted elsewhere
          #  value: "/app/data/influxdb2/config.yml"
         # --- Optional but Recommended: Resource Limits ---
         resources:

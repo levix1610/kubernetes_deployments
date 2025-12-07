@@ -1,0 +1,6 @@
+# nginx namesapce for ingress controller
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nginx

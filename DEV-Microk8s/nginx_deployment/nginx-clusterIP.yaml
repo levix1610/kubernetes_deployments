@@ -1,0 +1,17 @@
+# --- ClusterIP Service for nginx ---
+# Exposes nginx internally within the Kubernetes cluster.
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-clusterip-svc # Name for the internal service
+  namespace: nginx
+  labels:
+    app: nginx
+spec:
+  type: ClusterIP # Default type, stable internal IP
+  selector:
+    app: nginx # Selects Pods with the 'app: label'
+  ports:
+  - protocol: TCP
+    port: 80         # Port the service listens on
+    targetPort: 80 # Port number on the Pod to forward traffic to

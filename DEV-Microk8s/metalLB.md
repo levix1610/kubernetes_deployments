@@ -14,6 +14,7 @@
 # 10.0.100.35 - Ubuntu Desktop Container
 # 10.0.100.2  - PiHole DNS
 # 10.0.100.3  - PiHole DNS MGMT
+# 10.0.100.5  - Nginx
 
 # metalLB on Microk8s Cluster - MGMT VLAN NICs:
 # vmus-test-k8s-04 MGMT = 10.0.250.200
