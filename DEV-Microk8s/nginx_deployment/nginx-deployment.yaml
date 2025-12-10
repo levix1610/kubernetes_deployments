@@ -17,9 +17,9 @@ spec:
       labels:
         app: nginx # Labels applied to the Pod(s)
     spec:
-      securityContext: # Need to add to run container as admin since NFS share is set to Map as admin.
-        runAsUser: 1024           #Running as admin
-        runAsGroup: 1024          #Running as admin
+      #securityContext: # Need to add to run container as admin since NFS share is set to Map as admin.
+        #runAsUser: 1024           #Running as admin
+        #runAsGroup: 1024          #Running as admin
         #fsGroup: <Group_GID>
       containers:
       - name: nginx # Name for the container
