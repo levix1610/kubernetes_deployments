@@ -9,7 +9,7 @@ metadata:
   labels:
     app: pihole-mgmt
 spec:
-  replicas: 1 # Will keep at 1 as multiple instances can cause issue. SQLite does not do well with multiple instances writing to it at the same time. 
+  replicas: 2 # Will keep at 1 as multiple instances can cause issue. SQLite does not do well with multiple instances writing to it at the same time. 
   selector:
     # Must match the labels on the Pod template below and all other services.
     matchLabels:

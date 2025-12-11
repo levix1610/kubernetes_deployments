@@ -9,7 +9,7 @@ metadata:
   labels:
     app: heimdall
 spec:
-  replicas: 1
+  replicas: 2
   revisionHistoryLimit: 2  # Max number of replicasets
   selector:
     # Must match the labels on the Pod template below.
