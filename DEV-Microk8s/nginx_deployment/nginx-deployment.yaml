@@ -35,8 +35,8 @@ spec:
         # --- Optional but Recommended: Resource Limits ---
         resources:
             requests:
-              memory: "512Mi"
-              cpu: "250m"
+              memory: "128Mi"
+              cpu: "100m"
             limits:
               memory: "1Gi"
               cpu: "1000m" # 1 CPU core
