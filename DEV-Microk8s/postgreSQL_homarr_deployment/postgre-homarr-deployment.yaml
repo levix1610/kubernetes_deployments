@@ -20,7 +20,7 @@ spec:
       securityContext:
         runAsUser: 1002    # Matches the UNAS 'squashed' root ID (977)
         runAsGroup: 988   # Matches the UNAS GID
-        fsGroup: 988      # Helps K8s manage volume permissions
+        # fsGroup: 988      # Helps K8s manage volume permissions
       containers:
       - name: postgres-homarr
         # Use an official Postgres image. Consider pinning to a specific version (e.g., postgres:15) for stability.
