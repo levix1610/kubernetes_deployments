@@ -18,7 +18,7 @@ spec:
         app: postgrehomarr # Labels applied to the Pod
     spec:
       securityContext:
-        runAsUser: 977    # Matches the UNAS 'squashed' root ID
+        runAsUser: 1002    # Matches the UNAS 'squashed' root ID (977)
         runAsGroup: 988   # Matches the UNAS GID
         fsGroup: 988      # Helps K8s manage volume permissions
       containers:
