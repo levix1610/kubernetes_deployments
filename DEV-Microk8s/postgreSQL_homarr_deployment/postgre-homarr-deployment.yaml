@@ -18,7 +18,7 @@ spec:
         app: postgrehomarr # Labels applied to the Pod
     spec:
       securityContext:
-        runAsUser: 977    # Matches the UNAS 'squashed' root ID (977)
+        runAsUser: 1002    # Matches the UNAS 'squashed' root ID (977)
         runAsGroup: 988   # Matches the UNAS GID
         fsGroup: 988      # Helps K8s manage volume permissions
       containers:
@@ -52,8 +52,8 @@ spec:
           mountPath: /var/lib/postgresql/data
         #security context for container:
         securityContext:
-          runAsUser: 1001 #so container can modify storage as it needs.
-          runAsGroup: 1001
+          runAsUser: 1002 #so container can modify storage as it needs.
+          runAsGroup: 988
           allowPrivilegeEscalation: false
         # --- Optional but Recommended ---
         resources:
