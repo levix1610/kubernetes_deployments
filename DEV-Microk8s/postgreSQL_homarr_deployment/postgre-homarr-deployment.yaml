@@ -18,8 +18,8 @@ spec:
         app: postgrehomarr # Labels applied to the Pod
     spec:
       securityContext: # Need to add to run container as admin since NFS share is set to Map as admin.
-        runAsUser: 1000           # Running as admin
-        runAsGroup: 1000         # Running as admin
+        runAsUser: 1024           # Running as admin
+        runAsGroup: 100         # Running as admin
         #fsGroup: 1024
       containers:
       - name: postgres-homarr
@@ -52,8 +52,8 @@ spec:
           mountPath: /var/lib/postgresql/data
         #security context for container:
         securityContext:
-          runAsUser: 1000 #so container can modify storage as it needs.
-          runAsGroup: 1000
+          runAsUser: 1024 #so container can modify storage as it needs.
+          runAsGroup: 100
           allowPrivilegeEscalation: false
         # --- Optional but Recommended ---
         resources:
