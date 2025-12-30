@@ -17,5 +17,5 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain # Keeps data even after PV deletion.
   nfs:
-    server: 10.0.150.10 # NFS target IP.
-    path: /volume1/dev_microk8s/plex # Target Path. Check that end directory is created.
+    server: 10.0.150.205 # NFS target IP.
+    path: /mnt/storage_pool/dev_microk8s/plex # Target Path. Check that end directory is created.
