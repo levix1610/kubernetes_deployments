@@ -52,9 +52,9 @@ spec:
           claimName: plex-pvc # same as defined in pvc yaml.
       - name: media-movies # Volume mount for movies directory NFS share.
         nfs:
-          server: 10.0.150.200
+          server: 10.0.150.205
           path: /mnt/storage_pool/smb_test/movies # Path to the remote NFS share data.
       - name: media-tv # Volume mount for the tv shows directory NFS share.
         nfs:
-          server: 10.0.150.200
+          server: 10.0.150.205
           path: /mnt/storage_pool/smb_test/TvShows # Path to the remote NFS share data.
