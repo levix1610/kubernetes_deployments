@@ -17,5 +17,5 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain # So data persists on the PV even after deletion.
   nfs:
-    server: 10.0.150.200 # Remote address of the NFS share the PV will be housed on.
+    server: 10.0.150.205 # Remote address of the NFS share the PV will be housed on.
     path: /mnt/storage_pool/prod_microk8s/pihole # path to the remote storage. CHECK the final destination folder exists.

@@ -17,7 +17,7 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain # Make sure directory files
   nfs:
-    server: 10.0.150.200 # IP address of NAS for storage
+    server: 10.0.150.205 # IP address of NAS for storage
     path: /mnt/storage_pool/prod_microk8s/heimdall # Direct NFS share directory f
 
  
