@@ -1,0 +1,49 @@
+# --- Nginx Deployment ---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wiki-deployment # Name for the Deployment
+  namespace: nginx
+  labels:
+    app: wiki
+spec:
+  replicas: 3
+  revisionHistoryLimit: 2  # Max number of replicasets
+  selector:
+    matchLabels:
+      app: wiki # Must match labels on the Pod template
+  template:
+    metadata:
+      labels:
+        app: wiki # Labels applied to the Pod(s)
+    spec:
+      #securityContext: # Need to add to run container as admin since NFS share is set to Map as admin.
+        #runAsUser: 1024           #Running as admin
+        #runAsGroup: 1024          #Running as admin
+        #fsGroup: <Group_GID>
+      containers:
+      - name: wiki # Name for the container
+        # Use a specific version tag is recommended over latest
+        image: nginx:1.29.4 # updated (12/10/25)
+        ports:
+        - containerPort: 80
+          name: wiki-http # Name for the port
+        volumeMounts:
+        - name: wiki-data # Must match the volume name defined below
+          # Mount path inside the container as requested
+          mountPath: /usr/share/nginx/html # default storage location for nginx
+        # --- Optional but Recommended: Resource Limits ---
+        resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Gi"
+              cpu: "500m" # 1 CPU core
+      volumes:
+        # Define the volume that uses the PVC
+      - name: wiki-data # Must match volumeMounts.name above
+        persistentVolumeClaim:
+          # Must match the metadata.name of the PVC defined above
+          claimName: wiki-pvc
