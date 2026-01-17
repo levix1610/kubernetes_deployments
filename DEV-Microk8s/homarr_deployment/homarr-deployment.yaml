@@ -8,7 +8,7 @@ metadata:
   labels:
     app: homarr
 spec:
-  replicas: 2 # one replica; multiples can cause issues with homarr
+  replicas: 2
   revisionHistoryLimit: 2  # Max number of replicasets
   selector:
     matchLabels:

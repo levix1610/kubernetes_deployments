@@ -8,7 +8,7 @@ metadata:
   labels:
     app: homarr
 spec:
-  replicas: 2 # one replica; multiples can cause issues with homarr
+  replicas: 2
   revisionHistoryLimit: 2  # Max number of replicasets
   selector:
     matchLabels:
@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: homarr
-        image: ghcr.io/homarr-labs/homarr:v1.50.0 #(updated 1/9/25)
+        image: ghcr.io/homarr-labs/homarr:v1.50.1 #(updated 1/16/25)
         ports:
         - containerPort: 7575
           name: homarr-http
