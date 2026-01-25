@@ -38,9 +38,11 @@ spec:
           mountPath: /media/movies
         - name: media-tv # Name for mount of remote TV shows directory.
           mountPath: /media/tv
+        - name: media-music
+          mountPath: /media/music
         # --- Resource Limits - Necessary so media server does not saturate resources ---  
         resources:
-          requests:  # Minimum it requests for the POD.
+          requests:  # Minimum requests for the POD.
             memory: "512Mi"
             cpu: "1000m"
           limits: # Max resources it can use.
@@ -58,3 +60,7 @@ spec:
         nfs:
           server: 10.0.150.10
           path: /volume1/TvShows # Path to the remote NFS share data.
+      - name: media-music # Volume mount for the music directory NFS share.
+        nfs:
+          server: 10.0.150.10
+          path: /volume1/MusicPool # Path to the remote NFS Music Share.
