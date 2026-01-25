@@ -52,14 +52,17 @@ spec:
       - name: plex-data # Match from above volumeMounts. Hold container data.
         persistentVolumeClaim: # Uses defined PVC to mount for data storage.
           claimName: plex-pvc # same as defined in pvc yaml.
+      # ------------------------------------------------------------------
       - name: media-movies # Volume mount for movies directory NFS share.
         nfs:
           server: 10.0.150.10
           path: /volume1/Movies # Path to the remote NFS share data.
+      # ------------------------------------------------------------------
       - name: media-tv # Volume mount for the tv shows directory NFS share.
         nfs:
           server: 10.0.150.10
           path: /volume1/TvShows # Path to the remote NFS share data.
+      # ------------------------------------------------------------------
       - name: media-music # Volume mount for the music directory NFS share.
         nfs:
           server: 10.0.150.10
