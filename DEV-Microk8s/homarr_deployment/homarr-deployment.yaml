@@ -7,6 +7,8 @@ metadata:
     app: homarr
 spec:
   replicas: 1 # Back to one replica as testing - believe internal DB only likes one.
+  strategy:
+    type: Recreate # Recreates the POD instead of a rolling update - help to prevent SQLite DB corruption.
   revisionHistoryLimit: 2 # Max number of revisions to keep
   selector:
     matchLabels:
@@ -18,7 +20,7 @@ spec:
     spec:
       containers:
       - name: homarr
-        image: ghcr.io/homarr-labs/homarr:v1.52.0
+        image: ghcr.io/homarr-labs/homarr:v1.53.0
         ports:
         - containerPort: 7575
           name: homarr-http
