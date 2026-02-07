@@ -7,8 +7,6 @@ metadata:
     app: homarr
 spec:
   replicas: 1 # Back to one replica as testing - believe internal DB only likes one.
-  strategy:
-    type: Recreate # Recreates the POD instead of a rolling update - help to prevent SQLite DB corruption.
   revisionHistoryLimit: 2 # Max number of revisions to keep
   selector:
     matchLabels:
