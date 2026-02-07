@@ -1,5 +1,3 @@
-# --- Deployment ---
-# Manages the Pods running your application container.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -8,8 +6,8 @@ metadata:
   labels:
     app: homarr
 spec:
-  replicas: 1
-  revisionHistoryLimit: 2  # Max number of replicasets
+  replicas: 1 # Back to one replica as testing - believe internal DB only likes one.
+  revisionHistoryLimit: 2 # Max number of revisions to keep
   selector:
     matchLabels:
       app: homarr
@@ -20,50 +18,31 @@ spec:
     spec:
       containers:
       - name: homarr
-        image: ghcr.io/homarr-labs/homarr:v1.52.0 #(updated 1/30/26)
+        image: ghcr.io/homarr-labs/homarr:v1.52.0
         ports:
         - containerPort: 7575
           name: homarr-http
+        
         # --- ENVIRONMENT VARIABLES ---
         env:
-        #homarr internal encryption key
+        # KEEPING THIS: It encrypts your browser sessions/cookies
         - name: SECRET_ENCRYPTION_KEY
           valueFrom:
             secretKeyRef:
-              # Secret stored in ansible vault - see ansible repo for more info
-              # homarr secret needs to be created with hex 64 - run 'openssl rand -hex 32' to generate a passkey
               name: homarr-secrets
               key: SECRET_ENCRYPTION_KEY
-        - name: DATABASE_TYPE
-          value: "postgres" # Tell Homarr to use PostgreSQL
-        - name: DATABASE_HOST
-          # Use the name of the PostgreSQL Service created above
-          # Must be the Cluster IP 'name' defined in the yaml
-          value: "postgre-homarr-clusterip-svc"
-        - name: DATABASE_PORT
-          value: "5432" # Standard PostgreSQL port
-        - name: DATABASE_NAME
-          valueFrom:
-            secretKeyRef:
-              name: postgres-homarr-secret # Use the same secret
-              key: POSTGRES_DB
-        - name: DATABASE_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: postgres-homarr-secret # Use the same secret
-              key: POSTGRES_USER
-        - name: DATABASE_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: postgres-homarr-secret # Use the same secret
-              key: POSTGRES_PASSWORD
+        
+        # REMOVED: DATABASE_TYPE, HOST, PORT, NAME, USER, PASSWORD
+        # Homarr defaults to SQLite when these are missing.
+        
         # --- END OF ENVIRONMENT VARIABLES ---
-        volumeMounts:  #Mounted volumes for storage of homarr.
+
+        volumeMounts:
           - name: homarr-data
-            mountPath: /appdata #directory for configs folders.
+            mountPath: /appdata # Keeping this exactly as is since your data is here
         resources:
            requests:
-             memory: "512Mi"
+             memory: "128Mi"
              cpu: "100m"
            limits:
              memory: "1024Mi"
