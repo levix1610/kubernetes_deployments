@@ -26,7 +26,7 @@ spec:
         node.kubernetes.io/microk8s-worker: microk8s-worker
       containers:
       - name: pihole-iot
-        image: pihole/pihole:2025.11.1 # repot/app:version. (updated to latest version 11/30/2025) - tested
+        image: pihole/pihole:2026.02.0 # repot/app:version. (updated to latest version 2/21/2026) - tested
         ports:
         - containerPort: 443 # The port the application needs to connect to an HTTPS web socket.
           name: pihole-i-https # Name of the port.
