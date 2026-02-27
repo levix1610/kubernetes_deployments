@@ -6,7 +6,7 @@ metadata:
   labels:
     app: homarr
 spec:
-  replicas: 1 # Back to one replica as testing - believe internal DB only likes one.
+  replicas: 1 # Back to one replica as testing - internal DB only likes one.
   revisionHistoryLimit: 2 # Max number of revisions to keep
   selector:
     matchLabels:
