@@ -9,7 +9,7 @@ metadata:
   labels:
     app: grafana
 spec:
-  replicas: 2 # e.g., 2
+  replicas: 1 # Move to 1 replica since SQLite DB cannot handle multiple instances. Need to move to another DB if multiple replicas are ran.
   revisionHistoryLimit: 2  # Max number of replicasets
   selector:
     # Must match the labels on the Pod template below.
