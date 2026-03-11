@@ -63,11 +63,11 @@ spec:
             mountPath: /appdata #directory for configs folders.
         resources:
            requests:
-             memory: "512Mi"
+             memory: "256Mi"
              cpu: "100m"
            limits:
-             memory: "1024Mi"
-             cpu: "750m"
+             memory: "512Mi"
+             cpu: "500m"
       volumes:
        - name: homarr-data
          persistentVolumeClaim:
