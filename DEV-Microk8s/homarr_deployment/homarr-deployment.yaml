@@ -24,9 +24,10 @@ spec:
         ports:
         - containerPort: 7575
           name: homarr-http
+          
         # --- ENVIRONMENT VARIABLES ---
         env:
-        #homarr internal encryption key
+        # homarr internal encryption key
         - name: SECRET_ENCRYPTION_KEY
           valueFrom:
             secretKeyRef:
@@ -34,33 +35,36 @@ spec:
               # homarr secret needs to be created with hex 64 - run 'openssl rand -hex 32' to generate a passkey
               name: homarr-secrets
               key: SECRET_ENCRYPTION_KEY
-        - name: DATABASE_TYPE
-          value: "postgres" # Tell Homarr to use PostgreSQL
-        - name: DATABASE_HOST
-          # Use the name of the PostgreSQL Service created above
-          # Must be the Cluster IP 'name' defined in the yaml
+              
+        # --- CORRECTED DATABASE ENVIRONMENT VARIABLES ---
+        - name: DB_DRIVER
+          value: "node-postgres"
+        - name: DB_DIALECT
+          value: "postgresql"
+        - name: DB_HOST
           value: "postgre-homarr-clusterip-svc"
-        - name: DATABASE_PORT
-          value: "5432" # Standard PostgreSQL port
-        - name: DATABASE_NAME
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_NAME
           valueFrom:
             secretKeyRef:
-              name: postgres-homarr-secret # Use the same secret
+              name: postgres-homarr-secret
               key: POSTGRES_DB
-        - name: DATABASE_USERNAME
+        - name: DB_USER
           valueFrom:
             secretKeyRef:
-              name: postgres-homarr-secret # Use the same secret
+              name: postgres-homarr-secret
               key: POSTGRES_USER
-        - name: DATABASE_PASSWORD
+        - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: postgres-homarr-secret # Use the same secret
+              name: postgres-homarr-secret
               key: POSTGRES_PASSWORD
         # --- END OF ENVIRONMENT VARIABLES ---
-        volumeMounts:  #Mounted volumes for storage of homarr.
+        
+        volumeMounts:  # Mounted volumes for storage of homarr.
           - name: homarr-data
-            mountPath: /appdata #directory for configs folders.
+            mountPath: /appdata # directory for configs folders.
         resources:
            requests:
              memory: "256Mi"
