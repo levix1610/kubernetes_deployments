@@ -1,3 +1,5 @@
+# --- Deployment ---
+# Manages the Pods running your application container.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -6,8 +8,8 @@ metadata:
   labels:
     app: homarr
 spec:
-  replicas: 1 # Back to one replica as testing - internal DB only likes one.
-  revisionHistoryLimit: 2 # Max number of revisions to keep
+  replicas: 1
+  revisionHistoryLimit: 2  # Max number of replicasets
   selector:
     matchLabels:
       app: homarr
@@ -16,37 +18,74 @@ spec:
       labels:
         app: homarr
     spec:
+      # --- THE BOUNCER: Waits for Postgres ---
+      initContainers:
+        - name: wait-for-postgres
+          image: busybox:1.36
+          command:
+            - sh
+            - -c
+            - |
+              echo "Waiting for PostgreSQL to be ready..."
+              until nc -z postgre-homarr-clusterip-svc 5432; do
+                sleep 2
+              done;
+              echo "PostgreSQL is up! Releasing Homarr."
+              
       containers:
       - name: homarr
-        image: ghcr.io/homarr-labs/homarr:v1.56.0 #(updated 3/16/26)
+        image: ghcr.io/homarr-labs/homarr:v1.56.0 #(updated 3/14/26)
         ports:
         - containerPort: 7575
           name: homarr-http
-        
+          
         # --- ENVIRONMENT VARIABLES ---
         env:
-        # KEEPING THIS: It encrypts your browser sessions/cookies
+        # homarr internal encryption key
         - name: SECRET_ENCRYPTION_KEY
           valueFrom:
             secretKeyRef:
+              # Secret stored in ansible vault - see ansible repo for more info
+              # homarr secret needs to be created with hex 64 - run 'openssl rand -hex 32' to generate a passkey
               name: homarr-secrets
               key: SECRET_ENCRYPTION_KEY
-        
-        # REMOVED: DATABASE_TYPE, HOST, PORT, NAME, USER, PASSWORD
-        # Homarr defaults to SQLite when these are missing.
-        
+              
+        # --- CORRECTED DATABASE ENVIRONMENT VARIABLES ---
+        - name: DB_DRIVER
+          value: "node-postgres"
+        - name: DB_DIALECT
+          value: "postgresql"
+        - name: DB_HOST
+          value: "postgre-homarr-clusterip-svc"
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: postgres-homarr-secret
+              key: POSTGRES_DB
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-homarr-secret
+              key: POSTGRES_USER
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-homarr-secret
+              key: POSTGRES_PASSWORD
         # --- END OF ENVIRONMENT VARIABLES ---
-
-        volumeMounts:
+        
+        volumeMounts:  # Mounted volumes for storage of homarr.
           - name: homarr-data
-            mountPath: /appdata # Keeping this exactly as is since your data is here
+            mountPath: /appdata # directory for configs folders.
         resources:
            requests:
-             memory: "128Mi"
+             memory: "256Mi"
              cpu: "100m"
            limits:
-             memory: "1024Mi"
-             cpu: "750m"
+             memory: "1Gi"
+             cpu: "500m"
       volumes:
        - name: homarr-data
          persistentVolumeClaim:
