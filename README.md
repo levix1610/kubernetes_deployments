@@ -1,3 +1,2 @@
-# This is a repo for all my Kubernetes Deployments.
-
-# All deployments have been migrated over and this is now the source of truth for all my deployments.
+# This is the repo for all my Kubernetes Deployments.  
+# Holding all DEV and PROD branches for each deployment acting as the source of truth for all current active deployments.
