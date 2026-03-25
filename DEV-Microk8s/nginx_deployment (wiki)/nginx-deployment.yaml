@@ -36,10 +36,10 @@ spec:
         # --- Optional but Recommended: Resource Limits ---
         resources:
             requests:
-              memory: "128Mi"
+              memory: "64Mi"
               cpu: "100m"
             limits:
-              memory: "1Gi"
+              memory: "128Mi"
               cpu: "1000m" # 1 CPU core
       volumes:
         # Define the volume that uses the PVC

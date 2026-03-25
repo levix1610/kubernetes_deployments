@@ -41,11 +41,11 @@ spec:
         # --- Optional but Recommended Resources limits ---
         resources: 
           requests:
-            memory: "256Mi"
+            memory: "64Mi"
             cpu: "200m"
           limits:
-            memory: "1024Mi"
-            cpu: "2000m"
+            memory: "128Mi"
+            cpu: "1000m"
         # Adding secret for web UI password in Deployment as POD lives in MGMT subnet that default subnet does not have access to.  Unable to exec to pod.  
         # This needs to later on be move on to a proper Kubernetes encrypted secret.     
         env:

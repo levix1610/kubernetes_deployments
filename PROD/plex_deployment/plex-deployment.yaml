@@ -46,8 +46,8 @@ spec:
             memory: "128Mi"
             cpu: "500m"
           limits: # Max resources it can use.
-            memory: "2048Mi"
-            cpu: "3500m"
+            memory: "1024Mi"
+            cpu: "3000m"
       volumes: # Defines the data stores.
       - name: plex-data # Match from above volumeMounts. Hold container data.
         persistentVolumeClaim: # Uses defined PVC to mount for data storage.
