@@ -17,9 +17,9 @@ spec:
       labels:
         app: postgrehomarr # Labels applied to the Pod
     spec:
-      securityContext: # Need to add to run container as admin since NFS share is set to Map as admin.
-        runAsUser: 1001           # Running as admin
-        runAsGroup: 1001         # Running as admin
+      securityContext: # Need to add to run container as admin since NFS share is set to Map as user.
+        runAsUser: 1001           # Running as user
+        runAsGroup: 1001          # Running as user
         #fsGroup: 1024
       containers:
       - name: postgres-homarr

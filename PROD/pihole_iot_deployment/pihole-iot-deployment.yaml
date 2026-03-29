@@ -21,6 +21,9 @@ spec:
       labels:
         app: pihole-iot
     spec:
+      securityContext: # Need to add to run container as admin since NFS share is set to Map as user.
+        runAsUser: 1001           # Running as user
+        runAsGroup: 1001         # Running as user
       # selector so the Pod will only run on worker nodes with multiple vlans.
       nodeSelector:
         node.kubernetes.io/microk8s-worker: microk8s-worker
