@@ -22,10 +22,8 @@ spec:
         app: pihole
     spec:
       securityContext: # Need to add to run container as admin since NFS share is set to Map as user.
-        runAsUser: 1001           # Running as user
-        runAsGroup: 1001         # Running as user
+        fsUser: 1001         # Running as user
         fsGroup: 1001
-        fsGroupChangePolicy: "OnRootMismatch"
       containers:
       - name: pihole
         image: pihole/pihole:2026.02.0 # repot/app:version. (updated to latest version 2/21/2026) - tested
