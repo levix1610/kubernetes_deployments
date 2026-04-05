@@ -1,0 +1,21 @@
+# Set to create the service for defining the Nginx External IP
+apiVersion: v1
+kind: Service
+metadata:
+  name: ingress-loadbalancer
+  namespace: ingress
+  annotations:
+    # Tell MetalLB to assign this exact IP from your configured pool
+    metallb.universe.tf/loadBalancerIPs: "10.0.100.35" 
+spec:
+  type: LoadBalancer
+  selector:
+    # This selector matches the default MicroK8s Nginx pods
+    name: nginx-ingress-microk8s-controller
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+    - name: https
+      port: 443
+      targetPort: 443

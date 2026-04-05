@@ -13,6 +13,7 @@
 # 10.0.100.22 - Plex
 # 10.0.100.30 - heimdall
 # 10.0.100.31 - homarr
+# 10.0.100.35 - Ingress Nginx
 
 
 
