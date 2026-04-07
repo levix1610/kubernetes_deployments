@@ -11,7 +11,7 @@ spec:
   type: LoadBalancer
   selector:
     # This selector matches the default MicroK8s Nginx pods
-    name: nginx-ingress-microk8s-controller
+    name: nginx-ingress-microk8s
   ports:
     - name: http
       port: 80
