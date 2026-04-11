@@ -12,11 +12,11 @@ spec:
   ingressClassName: nginx
   tls:
   - hosts:
-    - homarr.dev.k8s.powersdesign.net # The URL you want to use
+    - homarr.dev.k8s.powersstudios.net # The URL you want to use
     # cert-manager will automatically create this Secret and store the certificate here
     secretName: homarr-tls-secret 
   rules:
-  - host: homarr.dev.k8s.powersdesign.net # The URL you want to use
+  - host: homarr.dev.k8s.powersstudios.net # The URL you want to use
     http:
       paths:
       - path: /
