@@ -14,7 +14,7 @@ spec:
   - hosts:
     - nginx.dev.k8s.powersstudios.net # The URL you want to use
     # cert-manager will automatically create this Secret and store the certificate here
-    secretName: nginx-tls-secret 
+    secretName: nginx-tls-secret
   rules:
   - host: nginx.dev.k8s.powersstudios.net # The URL you want to use
     http:
