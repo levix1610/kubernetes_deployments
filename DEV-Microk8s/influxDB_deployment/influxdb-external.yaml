@@ -1,3 +1,6 @@
+# MetalLB IP still required for ingestion of Logs from Proxmox Hosts.
+# Better use case then having it all go threw ingress for the overhead.
+
 apiVersion: v1
 kind: Service
 metadata:

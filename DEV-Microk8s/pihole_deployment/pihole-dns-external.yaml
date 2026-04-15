@@ -1,6 +1,8 @@
 # metalLB deployment file
 # States the address the LoadBalancer service type will use to expose app/service.
 # This service has port 53 also defined so DNS traffic can be directed to the pod.
+# External Service still required for DNS traffic
+# User Ingress for web interface - this for DNS traffic
 
 apiVersion: v1
 kind: Service
