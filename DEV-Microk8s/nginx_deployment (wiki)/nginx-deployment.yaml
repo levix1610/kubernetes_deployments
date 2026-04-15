@@ -25,7 +25,7 @@ spec:
       containers:
       - name: nginx # Name for the container
         # Use a specific version tag is recommended over latest
-        image: nginx:1.29.8 # updated (4/08/26)
+        image: nginx:1.30.0 # updated (4/14/26)
         ports:
         - containerPort: 80
           name: nginx-http # Name for the port
