@@ -27,5 +27,5 @@ spec:
       targetPort: 443
   type: LoadBalancer
   # Optional: To request a specific IP from your MetalLB pool
-  loadBalancerIP: "10.0.100.2"
+  loadBalancerIP: "10.105.105.20"
   externalTrafficPolicy: Local # Preserves source IP; Forces traffic to local node of pod.
