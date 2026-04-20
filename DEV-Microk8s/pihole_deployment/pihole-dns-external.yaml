@@ -21,10 +21,10 @@ spec:
       protocol: UDP
       port: 53
       targetPort: 53
-    - name: https
+    - name: http
       protocol: TCP
-      port: 443
-      targetPort: 443
+      port: 80
+      targetPort: 80
   type: LoadBalancer
   # Optional: To request a specific IP from your MetalLB pool
   loadBalancerIP: "10.105.105.20"

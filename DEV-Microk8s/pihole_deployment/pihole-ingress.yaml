@@ -25,4 +25,4 @@ spec:
           service:
             name: pihole-clusterip-svc # The exact name of your app's ClusterIP service
             port:
-              number: 443 # The internal port your app uses
+              number: 80 # The internal port your app uses
