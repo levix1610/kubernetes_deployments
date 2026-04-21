@@ -25,7 +25,7 @@ spec:
       - name: pihole
         image: pihole/pihole:2026.04.0 # repot/app:version. (updated to latest version 4/04/2026) - tested
         ports:
-        - containerPort: 443 # The port the application needs to connect to an HTTPS web socket.
+        - containerPort: 80 # The port the application needs to connect to an HTTP web socket.
           name: pihole-https # Name of the port.
         - containerPort: 53 # Port for the DNS traffic
           name: pihole-dns #Name of the port.

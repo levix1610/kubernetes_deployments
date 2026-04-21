@@ -27,7 +27,7 @@ spec:
       port: 53
       targetPort: 53
       # The external port to connect to the web insterface via a browser.
-    - name: https
+    - name: http
       protocol: TCP
-      port: 443
-      targetPort: 443
+      port: 80
+      targetPort: 80

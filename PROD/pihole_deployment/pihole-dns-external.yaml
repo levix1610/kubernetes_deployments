@@ -19,11 +19,11 @@ spec:
       protocol: UDP
       port: 53
       targetPort: 53
-    - name: https
+    - name: http
       protocol: TCP
-      port: 443
-      targetPort: 443
+      port: 80
+      targetPort: 80
   type: LoadBalancer
   # Optional: To request a specific IP from your MetalLB pool
-  loadBalancerIP: "10.0.150.3"
+  loadBalancerIP: "10.104.104.20"
   externalTrafficPolicy: Local # Preserves source IP; Forces traffic to local node of pod.

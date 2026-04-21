@@ -7,9 +7,6 @@ kind: Service
 metadata:
   name: pihole-iot-dns-external
   namespace: pihole
-  # need to add annotation so the service knows to use the vlan-mgmt IP address pool.
-  annotations:
-    metallb.io/address-pool: vlan-iot
 spec:
   selector:
     app: pihole-iot
@@ -22,11 +19,11 @@ spec:
       protocol: UDP
       port: 53
       targetPort: 53
-    - name: https
+    - name: http
       protocol: TCP
-      port: 443
-      targetPort: 443
+      port: 80
+      targetPort: 80
   type: LoadBalancer
   # Optional: To request a specific IP from your MetalLB pool
-  loadBalancerIP: "192.168.50.3"
+  loadBalancerIP: "10.104.104.21"
   externalTrafficPolicy: Local # Preserves source IP; Forces traffic to local node of pod.
