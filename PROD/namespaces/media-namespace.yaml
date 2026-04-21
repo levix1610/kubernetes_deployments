@@ -1,6 +1,0 @@
-# media namespace needed for plex/jellyfin deployments
-
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: media

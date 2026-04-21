@@ -6,7 +6,7 @@ metadata:
   namespace: ingress
   annotations:
     # Tell MetalLB to assign this exact IP from your configured pool
-    metallb.universe.tf/loadBalancerIPs: "10.105.105.25"
+    metallb.universe.tf/loadBalancerIPs: "10.104.104.25"
 spec:
   type: LoadBalancer
   selector:
