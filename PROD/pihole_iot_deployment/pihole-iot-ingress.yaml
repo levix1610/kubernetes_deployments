@@ -12,11 +12,11 @@ spec:
   ingressClassName: nginx
   tls:
   - hosts:
-    - pihole.iot.k8s.powersstudios.net # The URL you want to use
+    - pihole-iot.k8s.powersstudios.net # The URL you want to use
     # cert-manager will automatically create this Secret and store the certificate here
     secretName: pihole-iot-tls-secret
   rules:
-  - host: pihole.iot.k8s.powersstudios.net # The URL you want to use
+  - host: pihole-iot.k8s.powersstudios.net # The URL you want to use
     http:
       paths:
       - path: /
