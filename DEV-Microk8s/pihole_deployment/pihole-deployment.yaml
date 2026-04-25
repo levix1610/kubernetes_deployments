@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: pihole
-        image: pihole/pihole:2026.04.0 # repot/app:version. (updated to latest version 4/03/2026)
+        image: pihole/pihole:2026.04.1 # repot/app:version. (updated to latest version 4/24/2026)
         ports:
         - containerPort: 80 # The port the application needs to connect to an HTTP web socket.
           name: pihole-http # Name of the port.
