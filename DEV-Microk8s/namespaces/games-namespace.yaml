@@ -1,0 +1,6 @@
+# Namespace neede for homarr and postgresSQL database for app
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: games

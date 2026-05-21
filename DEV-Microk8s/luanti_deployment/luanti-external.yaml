@@ -1,0 +1,19 @@
+# MetalLB IP still required for ingestion of Logs from Proxmox Hosts.
+# Better use case then having it all go threw ingress for the overhead.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: luanti-external
+  namespace: games
+spec:
+  selector:
+    app: luanti # This label should match your Deployment's pod labels
+  ports:
+    - protocol: TCP
+      port: 80       # External port for the Service (what you connect to)
+      targetPort: 30000 # Internal port of the container deployment
+      name: http
+  type: LoadBalancer 
+  loadBalancerIP: 10.105.105.15 #target IP for the service.
+# test to see if can direct to container deployment without specifing the port.
