@@ -32,7 +32,7 @@ spec:
         - name: TZ
           value: "America/New_York"
         - name: CLI_ARGS
-          value: "--gameid voxelibre" # <-- Sets up your Vanilla Minecraft style game flavor
+          value: "--gameid mineclonia" # <-- Sets up your Vanilla Minecraft style game flavor
         volumeMounts:
         - name: luanti-data
           mountPath: /config/.minetest
