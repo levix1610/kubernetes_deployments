@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: luanti-server
+  namespace: games
+  labels:
+    app: luanti
+spec:
+  serviceName: "luanti-service" # Matches the headless service K8s expects for StatefulSets
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: luanti
+  template:
+    metadata:
+      labels:
+        app: luanti
+    spec:
+      containers:
+      - name: luanti
+        image: linuxserver/luanti:5.16.1 # updated (5/21/26)
+        ports:
+        - containerPort: 30000
+          name: luanti-port
+          protocol: UDP # <-- CRITICAL: Must be UDP
+        env:
+        - name: PUID
+          value: "1000" # <-- Match the user ID that owns your TrueNAS NFS share
+        - name: PGID
+          value: "1000" # <-- Match the group ID that owns your TrueNAS NFS share
+        - name: TZ
+          value: "America/New_York"
+        - name: CLI_ARGS
+          value: "--gameid voxelibre" # <-- Sets up your Vanilla Minecraft style game flavor
+        volumeMounts:
+        - name: luanti-data
+          mountPath: /config/.minetest
+        resources:
+          requests:
+            memory: "512Mi" # <-- Raised to prevent eviction/throttling during world generation
+            cpu: "500m"
+          limits:
+            memory: "2048Mi" # <-- Raised slightly to give overhead for mods/entities later
+            cpu: "2000m"
+      volumes:
+      - name: luanti-data
+        persistentVolumeClaim:
+          claimName: luanti-pvc
