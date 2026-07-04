@@ -6,10 +6,10 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: postgre-homarr-pvc  #pvc claim name
+  name: redis-homarr-pvc  #pvc claim name
   namespace: homarr
   labels:
-    app: postgrehomarr
+    app: redishomarr
 spec:
   storageClassName: nfs
   accessModes:
@@ -19,4 +19,4 @@ spec:
       storage: 10Gi  #Must be equal or less than PV claim
   selector:
     matchLabels:
-      app: postgrehomarr # This label should match the labels of your PV
+      app: redishomarr # This label should match the labels of your PV

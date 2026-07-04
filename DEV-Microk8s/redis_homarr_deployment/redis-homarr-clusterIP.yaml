@@ -5,20 +5,20 @@ apiVersion: v1
 kind: Service
 metadata:
   # name: A unique name for the ClusterIP service.
-  name: postgre-homarr-clusterip-svc
+  name: redis-homarr-clusterip-svc
   namespace: homarr
   labels:
-    app: postgrehomarr
+    app: redishomarr
 spec:
   # type: ClusterIP is the default, but explicitly stating it is clearer.
   type: ClusterIP
   # selector: Selects the Pods to send traffic to. Must match the labels on the Pods (spec.template.metadata.labels).
   selector:
-    app: postgrehomarr
+    app: redishomarr
   ports:
     # - protocol: Usually TCP.
   - protocol: TCP
     # port: The port number the Service will listen on *within the cluster*.
-    port: 5432 # e.g., 80
+    port: 6379 # e.g., 80
     # targetPort: The port on the Pods (containerPort) to forward traffic to. Can be the number or the name (e.g., 'http').
-    targetPort: 5432 # e.g., 8080 (must match containerPort in Deployment) or 'http' if named
+    targetPort: 6379 # e.g., 8080 (must match containerPort in Deployment) or 'http' if named
