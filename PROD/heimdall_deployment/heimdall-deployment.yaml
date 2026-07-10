@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: heimdall
-        image: linuxserver/heimdall@sha256:536eb14f068fe3f052b92f94ca606db689d1d1b79b5408d1242c12e882e4ed66 # updated (7/06/26)
+        image: linuxserver/heimdall:2.8.1 # updated (7/09/26)
         ports:
         - containerPort: 80 # The port your application listens on INSIDE the container (e.g., 8080)
           name: heimdall-port # Optional name for the port
