@@ -38,7 +38,7 @@ spec:
             memory: "184Mi"
             cpu: "100m"
           limits:
-            memory: "256Mi"
+            memory: "512Mi"
             cpu: "1000m"
          # env:  <-- We'll use this to configure Grafana's data path
         env:
