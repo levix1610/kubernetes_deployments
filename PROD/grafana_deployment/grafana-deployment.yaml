@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: grafana
-        image: grafana/grafana:11.6.16 # updated (6/24/26)
+        image: grafana/grafana:13.1.1 # updated (7/23/26)
         ports:
         - containerPort: 3000 # The port your application listens on INSIDE the container (e.g., 8080)
           name: grafana-http # Optional name for the port
@@ -38,7 +38,7 @@ spec:
             memory: "64Mi"
             cpu: "100m"
           limits:
-            memory: "256Mi"
+            memory: "512Mi"
             cpu: "1000m"
          # env:  <-- We'll use this to configure Grafana's data path
         env:
