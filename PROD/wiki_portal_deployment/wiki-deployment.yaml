@@ -25,7 +25,7 @@ spec:
       containers:
       - name: wiki # Name for the container
         # Use a specific version tag is recommended over latest
-        image: nginx:1.31.3 # updated (7/16/26)
+        image: nginx:1.31.4 # updated (8/19/26)
         ports:
         - containerPort: 80
           name: wiki-http # Name for the port
