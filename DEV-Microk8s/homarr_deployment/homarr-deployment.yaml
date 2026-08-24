@@ -74,6 +74,13 @@ spec:
             secretKeyRef:
               name: postgres-homarr-secret
               key: POSTGRES_PASSWORD
+        # --- REDIS VARS ---
+        - name: REDIS_IS_EXTERNAL
+          value: "true"
+        - name: REDIS_HOST
+          value: "homarr-redis"  # Matches your Redis Service name
+        - name: REDIS_PORT
+          value: "6379"
         # --- END OF ENVIRONMENT VARIABLES ---
         
         volumeMounts:  # Mounted volumes for storage of homarr.
