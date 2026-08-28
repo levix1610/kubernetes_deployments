@@ -8,7 +8,7 @@ metadata:
   name: redis-homarr-pv # A unique name for your PV
   namespace: homarr
   labels:
-    app: redishomarr
+    app: homarr-redis
 spec:
   storageClassName: nfs
   capacity:

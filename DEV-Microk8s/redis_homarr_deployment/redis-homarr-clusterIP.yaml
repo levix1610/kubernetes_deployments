@@ -8,13 +8,13 @@ metadata:
   name: redis-homarr-clusterip-svc
   namespace: homarr
   labels:
-    app: redishomarr
+    app: homarr-redis
 spec:
   # type: ClusterIP is the default, but explicitly stating it is clearer.
   type: ClusterIP
   # selector: Selects the Pods to send traffic to. Must match the labels on the Pods (spec.template.metadata.labels).
   selector:
-    app: redishomarr
+    app: homarr-redis
   ports:
     # - protocol: Usually TCP.
   - protocol: TCP
