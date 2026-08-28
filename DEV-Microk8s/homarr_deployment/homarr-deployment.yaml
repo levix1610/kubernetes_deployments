@@ -78,7 +78,7 @@ spec:
         - name: REDIS_IS_EXTERNAL
           value: "true"
         - name: REDIS_HOST
-          value: "homarr-redis"  # Matches your Redis Service name
+          value: "redis-homarr-clusterip-svc.homarr.svc.cluster.local"  # Matches your Redis Service name
         - name: REDIS_PORT
           value: "6379"
         # --- END OF ENVIRONMENT VARIABLES ---
