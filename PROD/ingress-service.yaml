@@ -1,21 +1,19 @@
-# Set to create the service for defining the Nginx External IP
+# Set to create the service for defining the Traefik External IP
 apiVersion: v1
 kind: Service
 metadata:
   name: ingress-loadbalancer
   namespace: ingress
   annotations:
-    # Tell MetalLB to assign this exact IP from your configured pool
     metallb.universe.tf/loadBalancerIPs: "10.104.104.25"
 spec:
   type: LoadBalancer
   selector:
-    # This selector matches the default MicroK8s Nginx pods
-    name: nginx-ingress-microk8s
+    app.kubernetes.io/name: traefik  # Matches Traefik Helm chart pods
   ports:
     - name: http
       port: 80
-      targetPort: 80
+      targetPort: 8000   # Traefik defaults to port 8000 internally for HTTP
     - name: https
       port: 443
-      targetPort: 443
+      targetPort: 8443   # Traefik defaults to port 8443 internally for HTTPS
