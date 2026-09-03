@@ -2,18 +2,19 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ingress-loadbalancer
+  name: traefik
   namespace: ingress
   annotations:
-    metallb.universe.tf/loadBalancerIPs: "10.104.104.25"
+    metallb.universe.tf/loadBalancerIPs: 10.104.104.25
 spec:
   type: LoadBalancer
   selector:
-    app.kubernetes.io/name: traefik  # Matches Traefik Helm chart pods
+    app.kubernetes.io/name: traefik
+    app.kubernetes.io/instance: traefik-ingress  # <--- Essential match to Microk8s Ingress controller
   ports:
-    - name: http
+    - name: web
       port: 80
-      targetPort: 8000   # Traefik defaults to port 8000 internally for HTTP
-    - name: https
+      targetPort: 8000
+    - name: websecure
       port: 443
-      targetPort: 8443   # Traefik defaults to port 8443 internally for HTTPS
+      targetPort: 8443

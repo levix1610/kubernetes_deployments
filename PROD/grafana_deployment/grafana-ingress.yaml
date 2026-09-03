@@ -9,7 +9,7 @@ metadata:
     # Specify the cert-manager resource
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
   tls:
   - hosts:
     - grafana.k8s.powersstudios.net # The URL you want to use
