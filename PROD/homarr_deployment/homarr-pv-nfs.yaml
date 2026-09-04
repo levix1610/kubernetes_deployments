@@ -20,3 +20,9 @@ spec:
     server: 10.104.104.30 # Replace with the actual IP or hostname of your NFS server / ex. 10.0.150.10
     #Path defined here HAS to exist in the directory. Will NOT create a directory for the app.
     path: /mnt/storage_pool/prod_microk8s/homarr # Replace with the actual export path on your NFS server / ex. /volume1/microk8s/nginx
+  mountOptions:
+    - hard
+    - nfsvers=4.1
+    - timeo=30        # Tries for 3 seconds before retrying (30 / 10ths of a second)
+    - retrans=3       # Retries 3 times before throwing an error to unblock the client
+    - noresvport      # Prevents port reuse issues during reconnects
