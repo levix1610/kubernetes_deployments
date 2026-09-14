@@ -1,0 +1,13 @@
+# RBAC configuration for Portainer Service Account with cluster-admin privileges
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: portainer-cluster-admin-binding
+subjects:
+- kind: ServiceAccount
+  name: portainer-sa-cluster-admin
+  namespace: portainer
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
