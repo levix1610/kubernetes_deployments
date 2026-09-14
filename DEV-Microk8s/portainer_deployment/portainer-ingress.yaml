@@ -25,4 +25,4 @@ spec:
           service:
             name: portainer-clusterip-svc # The exact name of your app's ClusterIP service
             port:
-              number: 9443 # The internal port your app uses
+              number: 9000 # The internal port your app uses
