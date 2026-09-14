@@ -19,7 +19,7 @@ spec:
       serviceAccountName: portainer-sa-cluster-admin
       containers:
       - name: portainer
-        image: portainer/portainer-ce:latest
+        image: portainer/portainer-ce:2.45.0-alpine
         args:
         - --admin-password-file=/etc/portainer/admin_password
         # Remove or adjust args based on your TLS/Ingress setup
