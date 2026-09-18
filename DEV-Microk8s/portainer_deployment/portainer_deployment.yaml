@@ -19,7 +19,7 @@ spec:
       serviceAccountName: portainer-sa-cluster-admin
       containers:
       - name: portainer
-        image: portainer/portainer-ce:2.45.0
+        image: portainer/portainer-ce:2.45.1 #(updated 9/18/26)
         ports:
         - name: http
           containerPort: 9000
