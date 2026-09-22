@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: redis
-        image: redis:8.8.2-alpine  # Fixed version note below
+        image: redis:8.8.3-alpine  # Fixed version note below
         command: ["redis-server", "--appendonly", "yes"]
         ports:
         - containerPort: 6379
