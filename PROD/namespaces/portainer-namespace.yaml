@@ -1,0 +1,7 @@
+# namespace for portainer deployments
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: portainer
+  

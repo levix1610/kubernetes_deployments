@@ -1,0 +1,34 @@
+# Portainer Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portainer
+  namespace: portainer
+  labels:
+    app.kubernetes.io/name: portainer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: portainer
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: portainer
+    spec:
+      serviceAccountName: portainer-sa-cluster-admin
+      containers:
+      - name: portainer
+        image: portainer/portainer-ce:2.45.1 #(updated 9/18/26)
+        ports:
+        - name: http
+          containerPort: 9000
+        - name: https
+          containerPort: 9443
+        volumeMounts:
+        - name: data
+          mountPath: /data
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: portainer-pvc

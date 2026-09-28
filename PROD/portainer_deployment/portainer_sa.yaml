@@ -1,0 +1,6 @@
+# Service Account for Portainer with cluster-admin privileges
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: portainer-sa-cluster-admin
+  namespace: portainer
