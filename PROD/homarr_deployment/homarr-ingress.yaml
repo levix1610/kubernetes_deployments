@@ -8,6 +8,9 @@ metadata:
   annotations:
     # Specify the cert-manager resource
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
+     # Enable sticky sessions in Traefik
+    traefik.ingress.kubernetes.io/affinity: "true"
+    traefik.ingress.kubernetes.io/session-cookie-name: "homarr_sticky"
 spec:
   ingressClassName: traefik
   tls:
