@@ -57,18 +57,18 @@ spec:
               name: homarr-secrets
               key: SECRET_ENCRYPTION_KEY
 
-        # Trust Traefik headers
-        - name: AUTH_TRUST_HOST
-          value: "true"
-          
         # SSL-terminating reverse proxy
         - name: NODE_ENV
           value: "production"
 
-        # Explicit canonical URLs
-        - name: AUTH_URL
+        # Forces Auth.js / NextAuth to strictly evaluate HTTPS proxy traffic
+        - name: AUTH_TRUST_HOST
+          value: "true"
+        - name: AUTH_REDIRECT_PROXY_URL
           value: "https://homarr.k8s.powersstudios.net"
         - name: NEXTAUTH_URL
+          value: "https://homarr.k8s.powersstudios.net"
+        - name: AUTH_URL
           value: "https://homarr.k8s.powersstudios.net"
               
         # --- CORRECTED DATABASE ENVIRONMENT VARIABLES ---
