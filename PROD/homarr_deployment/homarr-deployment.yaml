@@ -49,8 +49,9 @@ spec:
               # homarr secret needs to be created with hex 64 - run 'openssl rand -hex 32' to generate a passkey
               name: homarr-secrets
               key: SECRET_ENCRYPTION_KEY
+
         # Web session & JWT signing key (Fixes multi-replica login loops)
-        - name: AUTH_SECRET
+        - name: NEXTAUTH_SECRET
           valueFrom:
             secretKeyRef:
               name: homarr-secrets
