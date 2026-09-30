@@ -8,7 +8,7 @@ metadata:
   labels:
     app: homarr
 spec:
-  replicas: 2
+  replicas: 3
   revisionHistoryLimit: 2  # Max number of replicasets
   selector:
     matchLabels:
@@ -54,7 +54,27 @@ spec:
           valueFrom:
             secretKeyRef:
               name: homarr-secrets
-              key: SECRET_ENCRYPTION_KEY # You can re-use the same 64-hex key here
+              key: SECRET_ENCRYPTION_KEY
+        - name: NEXTAUTH_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: homarr-secrets
+              key: SECRET_ENCRYPTION_KEY
+
+        # SSL-terminating reverse proxy
+        - name: NODE_ENV
+          value: "production"
+
+        # Forces Auth.js / NextAuth to strictly evaluate HTTPS proxy traffic
+        - name: AUTH_TRUST_HOST
+          value: "true"
+        - name: AUTH_REDIRECT_PROXY_URL
+          value: "https://homarr.dev.k8s.powersstudios.net"
+        - name: NEXTAUTH_URL
+          value: "https://homarr.dev.k8s.powersstudios.net"
+        - name: AUTH_URL
+          value: "https://homarr.dev.k8s.powersstudios.net"
+              
               
         # --- CORRECTED DATABASE ENVIRONMENT VARIABLES ---
         - name: DB_DRIVER
