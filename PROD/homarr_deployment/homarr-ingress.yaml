@@ -11,6 +11,8 @@ metadata:
      # Enable sticky sessions in Traefik
     traefik.ingress.kubernetes.io/affinity: "true"
     traefik.ingress.kubernetes.io/session-cookie-name: "homarr_sticky"
+    # Ensure Traefik passes real SSL/Host headers to Auth.js
+    traefik.ingress.kubernetes.io/router.middlewares: "homarr-headers@kubernetescrd"
 spec:
   ingressClassName: traefik
   tls:
