@@ -11,15 +11,13 @@ metadata:
      # Enable sticky sessions in Traefik
     traefik.ingress.kubernetes.io/affinity: "true"
     traefik.ingress.kubernetes.io/session-cookie-name: "homarr_sticky"
-    # Ensure Traefik passes real SSL/Host headers to Auth.js
-    traefik.ingress.kubernetes.io/router.middlewares: "homarr-headers@kubernetescrd"
 spec:
   ingressClassName: traefik
   tls:
   - hosts:
     - homarr.k8s.powersstudios.net # The URL you want to use
     # cert-manager will automatically create this Secret and store the certificate here
-    secretName: homarr-tls-secret 
+    secretName: homarr-tls-secret
   rules:
   - host: homarr.k8s.powersstudios.net # The URL you want to use
     http:

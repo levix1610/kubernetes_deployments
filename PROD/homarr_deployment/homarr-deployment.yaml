@@ -60,6 +60,10 @@ spec:
         # Trust Traefik headers
         - name: AUTH_TRUST_HOST
           value: "true"
+          
+        # SSL-terminating reverse proxy
+        - name: NODE_ENV
+          value: "production"
 
         # Explicit canonical URLs
         - name: AUTH_URL
