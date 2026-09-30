@@ -55,7 +55,17 @@ spec:
           valueFrom:
             secretKeyRef:
               name: homarr-secrets
-              key: SECRET_ENCRYPTION_KEY # You can re-use the same 64-hex key here
+              key: SECRET_ENCRYPTION_KEY
+
+        # Trust Traefik headers
+        - name: AUTH_TRUST_HOST
+          value: "true"
+
+        # Explicit canonical URLs
+        - name: AUTH_URL
+          value: "https://homarr.k8s.powersstudios.net"
+        - name: NEXTAUTH_URL
+          value: "https://homarr.k8s.powersstudios.net"
               
         # --- CORRECTED DATABASE ENVIRONMENT VARIABLES ---
         - name: DB_DRIVER
