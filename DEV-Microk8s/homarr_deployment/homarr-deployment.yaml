@@ -49,15 +49,6 @@ spec:
               # Secret stored in ansible vault - see ansible repo for more info
               name: homarr-secrets
               key: SECRET_ENCRYPTION_KEY
-        # Shared Auth.js HMAC key (signs the CSRF token). MUST be identical on
-        # every replica or CSRF validation fails whenever Traefik routes a
-        # request to a different pod than the one that issued the token.
-        # NextAUTH_SECRET is a legacy alias and is ignored when AUTH_SECRET is set.
-        - name: AUTH_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: homarr-secrets
-              key: SECRET_ENCRYPTION_KEY
         # Canonical external URL. Auth.js falls back to x-forwarded-host when this
         # is unset, but pinning it avoids any ambiguity when the browser origin
         # and the forwarded host disagree.
@@ -89,13 +80,6 @@ spec:
             secretKeyRef:
               name: postgres-homarr-secret
               key: POSTGRES_PASSWORD
-        # --- REDIS VARS ---
-        - name: REDIS_IS_EXTERNAL
-          value: "true"
-        - name: REDIS_HOST
-          value: "redis-homarr-clusterip-svc.homarr.svc.cluster.local"  # Matches your Redis Service name
-        - name: REDIS_PORT
-          value: "6379"
         # --- END OF ENVIRONMENT VARIABLES ---
         
         volumeMounts:  # Mounted volumes for storage of homarr.
