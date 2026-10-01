@@ -8,10 +8,11 @@ metadata:
   annotations:
     # Specify the cert-manager resource
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    # Forward the original scheme + host to the backend so Homarr's
-    # isSecureCookieEnabled(req) returns true and emits a Secure __Host- CSRF cookie
-    traefik.ingress.kubernetes.io/forwardedheaders: "X-Forwarded-Proto,X-Forwarded-Host"
-    traefik.ingress.kubernetes.io/forwardedhost-alias: "X-Forwarded-Host"
+    traefik.ingress.kubernetes.io/affinity: "true"
+    traefik.ingress.kubernetes.io/session-cookie-name: "__Host-homarr.csrf-token"
+    traefik.ingress.kubernetes.io/session-cookie-maxage: "60"
+    traefik.ingress.kubernetes.io/session-cookie-samesite: "Lax"
+    traefik.ingress.kubernetes.io/session-cookie-secure: "true"
 spec:
   ingressClassName: traefik
   tls:
