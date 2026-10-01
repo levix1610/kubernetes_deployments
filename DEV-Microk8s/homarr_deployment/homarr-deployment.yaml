@@ -49,9 +49,7 @@ spec:
               # Secret stored in ansible vault - see ansible repo for more info
               name: homarr-secrets
               key: SECRET_ENCRYPTION_KEY
-        # Canonical external URL. Auth.js falls back to x-forwarded-host when this
-        # is unset, but pinning it avoids any ambiguity when the browser origin
-        # and the forwarded host disagree.
+        # Canonical external URL. 
         - name: AUTH_URL
           value: "https://homarr.dev.k8s.powersstudios.net"
               
