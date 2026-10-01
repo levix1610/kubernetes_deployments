@@ -9,8 +9,8 @@ metadata:
     # Specify the cert-manager resource
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     traefik.ingress.kubernetes.io/affinity: "true"
-    traefik.ingress.kubernetes.io/session-cookie-name: "__Host-homarr.csrf-token"
-    traefik.ingress.kubernetes.io/session-cookie-maxage: "60"
+    traefik.ingress.kubernetes.io/session-cookie-name: "homarr_affinity"
+    traefik.ingress.kubernetes.io/session-cookie-maxage: "30"
     traefik.ingress.kubernetes.io/session-cookie-samesite: "Lax"
     traefik.ingress.kubernetes.io/session-cookie-secure: "true"
 spec:
