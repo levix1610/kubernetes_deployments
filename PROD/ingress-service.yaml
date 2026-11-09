@@ -5,7 +5,7 @@ metadata:
   name: traefik
   namespace: ingress
   annotations:
-    metallb.universe.tf/loadBalancerIPs: 10.104.104.25
+    metallb.universe.tf/loadBalancerIPs: 10.106.106.25
 spec:
   type: LoadBalancer
   selector:
